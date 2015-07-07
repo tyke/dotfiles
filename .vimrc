@@ -31,6 +31,29 @@ highlight EOLWS ctermbg=red guibg=red
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_map = '<c-p>'
 nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_clear_cache_on_exit = 0
+
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Use the right side of the screen
+let g:buffergator_viewport_split_policy = 'B'
+" I want my own keymappings...
+let g:buffergator_suppress_keymaps = 1
+" Go to the previous buffer open
+nmap <leader>j :BuffergatorMruCyclePrev<cr>
+" Go to the next buffer open
+nmap <leader>k :BuffergatorMruCycleNext<cr>
+" View the entire list of buffers open
+nmap <leader>bb :BuffergatorOpen<cr>
+" Shared bindings from Solution #1 from earlier
+nmap <leader>T :enew<cr>
+nmap <leader>bq :bp <BAR> bd #<cr>
+
+:let g:battery = system('cat ~/.battery')
+:autocmd CursorHold * let g:battery = system('cat ~/.battery')
+let g:airline_section_y = '%{g:battery}'
